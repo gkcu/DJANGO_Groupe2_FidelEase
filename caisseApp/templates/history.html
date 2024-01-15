@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+	<h1>Bills :</h1>
+	<hr>
+	<table class="table table-hover">
+		<thead>
+			<tr class="table-secondary">
+				<th scope="col">ID</th>
+				<th scope="col">User</th>
+				<th scope="col">Date</th>
+				<th scope="col">Time</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for facture in factures %}
+			<tr class="table-secondary">
+				<th scope="row">{{ facture.id }}</th>
+				<td>{{ facture.userId.username }}</td>
+				<td>{{ facture.date|date:"Y-m-d" }}</td>
+				<td>{{ facture.date|time:"H:i" }}</td>
+				<td>
+					<a href="{% url 'facture' facture.id %}" class="btn btn-primary">View</a>
+				</td>
+			</tr>
+			{% empty %}
+			<tr class="table-secondary">
+				<td colspan="5">No factures available.</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

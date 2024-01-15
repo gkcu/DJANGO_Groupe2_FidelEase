@@ -1,0 +1,61 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+        <form method="POST" action="{% url 'sendMessage' user.id %}">
+            {% csrf_token %}
+            <h3>Send message :</h3>
+            <hr>
+            <div class="form-group">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Subject</label>
+                </div>
+                <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Type something..."></textarea>
+                <br/>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+            <br/>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4 offset-lg-1">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Messages with {{ user.username }}</div>
+            <div class="card-body">
+                <div class="card-body">
+                    {% for message in messages %}
+                    <div class="card-title {% if message.fromUserId.id == request.user.id %}text-right{% else %}text-left{% endif %}">
+                        <div class="{% if message.fromUserId.id == request.user.id %}card-text {% else %}card-text{% endif %}">
+                            {{ message.text }}
+                            <br />
+                            <small class="card-text">{{ message.date|date:"Y-m-d H:i" }}</small>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-center text-muted">No messages with this user.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+{% block extra_css %}
+<style>
+	.message-bubble {
+		padding: 10px;
+		border-radius: 20px;
+		display: inline-block;
+		max-width: 70%;
+	}
+</style>
+{% endblock %}

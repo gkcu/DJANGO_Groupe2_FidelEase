@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>
+			{% block title %}
+				FidelEase - Staff
+			{% endblock %}
+		</title>
+		{% load bootstrap4 %}
+		{% load bootstrap5 %}
+		{% bootstrap_css %}
+		{% bootstrap_javascript %}
+		{% load static %}
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+		<link rel="stylesheet" href="{% static 'vendor/bootstrap-icons/font/bootstrap-icons.min.css' %}">
+		<link rel="stylesheet" href="{% static 'vendor/bootstrap/prismjs/themes/prism-okaidia.css' %}">
+		<link rel="stylesheet" href="{% static 'css/custom.min.css' %}">
+
+
+		<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KGDJBEFF3W"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+	  
+			gtag('config', 'G-KGDJBEFF3W');
+		</script>
+	</head> 
+	<body>
+		<nav class="navbar navbar-expand-lg fixed-top" data-bs-theme="dark">
+			<div class="container">
+				<a class="navbar-brand" href="{% url 'products' %}"><strong>FidelEase</strong></a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav me-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'products' %}">Home
+							<span class="visually-hidden">(current)</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'caisse' %}">Caisse</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'gifts' %}">Gifts</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'history' %}">History</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="{% url 'inbox' %}">Inbox</a>
+						</li>
+					</ul>
+					<form class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+						<input class="form-control me-sm-2" type="search" placeholder="Search...">
+						<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+					</form>
+					{% if user.is_authenticated %}
+					<div class="col-md-3 text-end">
+						<a type="button" class="btn btn-outline-secondary" href="{% url 'logout' %}">Logout</a>
+					</div>
+					{% else %}
+					<div class="col-md-3 text-end">
+						<a type="button" class="btn btn-secondary" href="{% url 'login' %}">Login</a>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="bs-docs-section">
+				{% block content %} {% endblock %}
+			</div>
+		</div>
+
+		<div class="container">
+			<footer id="footer">
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="list-unstyled">
+							<li class="float-end"><a href="#top">Back to top</a></li>
+							<li><a href="https://Facebook.com/">Facebook</a></li>
+							<li><a href="https://Instagram.com/">Instagram</a></li>
+							<li><a href="https://Twitter.com/">Twitter</a></li>
+							<li><a href="https://Github.com/">GitHub</a></li>
+						</ul>
+						<p>Copyright © 2024 - FidelEase Corporation. All rights reserved.</p>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+
+		<script>
+			const navElement = document.querySelector('.navbar');
+			window.addEventListener('scroll', () => {
+				if(window.scrollY >= 56) {
+					navElement.classList.add('navbar-scrolled');
+				}
+				else if(window.scrollY < 56) {
+					navElement.classList.remove('navbar-scrolled');
+				}
+			});
+		</script>
+		<script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'vendor/bootstrap/prismjs/prism.js' %}" data-manual></script>
+		<script src="{% static 'js/custom.js' %}"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		
+	</body>
+</html>

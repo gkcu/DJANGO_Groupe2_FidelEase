@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+	<form method="POST" class="form-inline">
+		{% csrf_token %}
+		<div class="form-group">
+            <h1>Scan gift code :</h1>
+            <hr>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="giftCode" name="giftCode" placeholder="Enter gift code" required>
+                <label for="giftCode" class="sr-only">Gift code</label>
+            </div>
+		</div>
+        <div class="d-grid gap-2">
+		    <button type="submit" class="btn btn-primary">Check</button>
+        </div>
+	</form>
+	{% if gift %}
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Gift code valid!</strong> The code you have entered refers to the following gift.
+        <img src="{{ gift.productId.image.url }}" style="width: 100px" alt="{{ gift.productId.name }}" />
+		<p><strong>ID :</strong> {{ gift.productId.id }}</p>
+		<p><strong>Product :</strong> {{ gift.productId.name }}</p>
+		<p><strong>Point cost :</strong> {{ gift.pointCost }} </p>
+		<p><strong>Price :</strong> {{ gift.pointCost }} MAD</p>
+    </div>
+	{% endif %}
+</div>
+{% endblock %}

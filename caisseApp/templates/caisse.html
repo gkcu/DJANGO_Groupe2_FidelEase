@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+	<h1>Caisse: </h1>
+	<hr>
+	<form method="POST">
+		{% csrf_token %}
+		<div class="form-group">
+			<div class="form-floating mb-3">
+				<input type="number" name="userPk" id="userPk" class="form-control" placeholder="User ID" required />
+				<label for="userPk">User ID</label>
+				<legend class="mt-4">Products :</legend>
+				<br/>
+				{% for product in products %}
+				<div class="form-check">
+					<label class="form-check-label">
+						<input class="form-check-input" type="checkbox" name="products" value="{{ product.id }}" />
+						{{ product.name }} - Price: {{ product.price }}
+						<input class="form-check-input" type="number" name="quantity_{{ product.id }}" min="1" value="1" />
+					</label>
+				</div>
+				{% endfor %}
+				</div>
+				<div class="d-grid gap-2">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+	</form>
+</div>
+{% endblock %}

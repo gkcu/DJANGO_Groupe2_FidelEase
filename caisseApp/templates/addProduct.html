@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="row">
+    {% load crispy_forms_tags %}
+    <form method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="form-group">
+            <h3>Add new product :</h3>
+            <hr>
+            {{ form|crispy }}
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a type="button" class="btn btn-secondary" href="{% url 'products' %}">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

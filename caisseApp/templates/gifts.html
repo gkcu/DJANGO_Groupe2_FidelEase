@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
+<div class="row">
+	<h1>List of gifts :</h1>
+	<hr>
+	<ul class="list-unstyled">
+		<li>
+			<a href="{% url 'addGift' %}" >Add new gift</a>
+		</li>
+	</ul>
+	<table class="table table-hover">
+		<thead>
+			<tr class="table-secondary">
+				<th scope="col">Product</th>
+				<th scope="col">ID</th>
+				<th scope="col">Point cost</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for gift in gifts %}
+			<tr class="table-secondary">
+				<th scope="row">{{ gift.productId.name }}</th>
+				<td>{{ gift.productId.id }}</td>
+				<td>{{ gift.pointCost }}</td>
+				<td>
+					<a href="{% url 'editGift' gift.id %}" class="btn btn-secondary">Edit</a>
+					<a href="{% url 'deleteGift' gift.id %}" class="btn btn-danger">Delete</a>
+				</td>
+			</tr>
+			{% empty %}
+			<tr class="table-secondary">
+				<td colspan="4">No gifts available.</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

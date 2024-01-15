@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+        <h1>Product details :</h1>
+        <hr />
+        <h4>
+            {{product.name}}
+        </h4>
+        <h5 class = "col-sm-10">
+            {{product.price}} MAD
+        </h5>
+    </div>
+    <div class="col-lg-4 offset-lg-1">
+        <br />
+        <br />
+        <br />
+        <br />
+        <img src="{{product.image.url}}" style="width: 200px" />
+    </div>
+    <div>
+        <a href="{% url 'editProduct' product.id %}" class="btn btn-link">Edit</a>
+        <a href="{% url 'products'%}" class="btn btn-link">Back to List</a>
+    </div>
+</div>
+{% endblock %}

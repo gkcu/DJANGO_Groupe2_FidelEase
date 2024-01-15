@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <form method="POST">
+        {% csrf_token %} 
+        <div class="form-group">
+            <h3>
+                {% if form.instance.pk %}
+                    Edit gift :
+                {% else %}
+                    Add new gift :
+                {% endif %}
+            </h3>
+            <hr>
+            {{ form|crispy }}
+        <div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary">Close</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

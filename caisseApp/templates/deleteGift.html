@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+	<h1>Delete gift :</h1>
+	<hr>
+	<p>Are you sure you want to permanently delete this gift?</p>
+	<form method="POST">
+		{% csrf_token %}
+		<button type="submit" class="btn btn-danger">Yes, delete it</button>
+		<a href="{% url 'gifts' %}" class="btn btn-secondary">Cancel</a>
+	</form>
+</div>
+{% endblock %}
